@@ -40,7 +40,7 @@ def subsonic_call(command, params = []):
     if response.status_code != 200:
         raise Exception("Subsonic REST API returned status code %s" % {response.status_code})
 
-    root = ET.fromstring(response.text)
+    root = ET.fromstring(response.text.encode('utf-8'))
     error = (root.find("{%(ns)s}error" % {"ns": subsonic_namespace }))
     
     if error is not None:
